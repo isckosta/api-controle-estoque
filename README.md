@@ -17,13 +17,13 @@ API REST desenvolvida em Laravel para gerenciar um módulo simplificado de contr
 
 ## 🚀 Tecnologias
 
-- **Laravel 12**
-- **PHP 8.2**
-- **PostgreSQL 16**
-- **Docker & Docker Compose**
-- **Nginx**
-- **PHPUnit** para testes
-- **Swagger/OpenAPI** para documentação
+- **Laravel 12** - Framework PHP
+- **PHP 8.2** - Linguagem de programação
+- **PostgreSQL 16** - Banco de dados relacional
+- **Docker & Docker Compose** - Containerização
+- **Nginx** - Servidor web
+- **PHPUnit** - Framework de testes
+- **Swagger/OpenAPI (L5-Swagger)** - Documentação interativa da API
 
 ## ✨ Funcionalidades
 
@@ -104,12 +104,15 @@ docker compose exec app php artisan migrate
 docker compose exec app php artisan db:seed
 ```
 
-#### 7. Instalar dependências do Swagger (opcional)
+#### 7. Configurar Swagger (Documentação da API)
+
+O Swagger já está configurado no projeto. Para gerar a documentação:
+
 ```bash
-docker compose exec app composer require darkaonline/l5-swagger
-docker compose exec app php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
 docker compose exec app php artisan l5-swagger:generate
 ```
+
+Após gerar, acesse a documentação interativa em: http://localhost:8000/api/documentation
 
 ### Acessar a Aplicação
 
@@ -283,9 +286,46 @@ make seed
 http://localhost:8000/api/v1
 ```
 
-Para documentação completa dos endpoints, consulte:
-- **Swagger UI**: http://localhost:8000/api/documentation
-- **Arquivo**: [API_README.md](./API_README.md)
+### 📖 Documentação Swagger/OpenAPI
+
+A API possui documentação interativa completa via Swagger UI, onde você pode:
+- Visualizar todos os endpoints disponíveis
+- Ver exemplos de requisições e respostas
+- Testar os endpoints diretamente pelo navegador
+- Consultar schemas de dados e validações
+
+**Acessar Swagger UI**: http://localhost:8000/api/documentation
+
+#### Gerar/Atualizar Documentação Swagger
+
+```bash
+# Com Docker
+docker compose exec app php artisan l5-swagger:generate
+
+# Local
+php artisan l5-swagger:generate
+```
+
+A documentação é gerada automaticamente a partir das anotações PHPDoc nos controllers.
+
+### 📮 Collection do Postman
+
+O projeto inclui uma collection completa do Postman com todos os endpoints da API pré-configurados.
+
+**Arquivo**: `postman_collection.json` (na raiz do projeto)
+
+#### Como usar:
+
+1. Abra o Postman
+2. Clique em **Import**
+3. Selecione o arquivo `postman_collection.json`
+4. A collection "API Estoque" será importada com todos os endpoints
+
+A collection inclui:
+- ✅ Todos os endpoints de Produtos, Estoque e Vendas
+- ✅ Exemplos de requisições com dados válidos
+- ✅ Variáveis de ambiente pré-configuradas
+- ✅ Testes automatizados para validar respostas
 
 ### Principais Endpoints
 
@@ -298,6 +338,22 @@ Para documentação completa dos endpoints, consulte:
 - **POST** `/api/v1/inventory` - Adicionar ao estoque
 - **POST** `/api/v1/sales` - Criar venda
 - **GET** `/api/v1/sales/{id}` - Detalhes da venda
+
+### 📚 Recursos de Documentação
+
+A API oferece múltiplas formas de documentação e teste:
+
+1. **Swagger UI** (Recomendado): http://localhost:8000/api/documentation
+   - Documentação interativa e visual
+   - Teste endpoints diretamente no navegador
+   
+2. **Postman Collection**: `postman_collection.json`
+   - Collection completa para importar no Postman
+   - Exemplos prontos para uso
+   
+3. **API_README.md**: [API_README.md](./API_README.md)
+   - Documentação detalhada em Markdown
+   - Exemplos de requisições e respostas
 
 ## 🧪 Testes
 

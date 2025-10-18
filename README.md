@@ -4,16 +4,16 @@ API REST desenvolvida em Laravel para gerenciar um módulo simplificado de contr
 
 ## 📋 Índice
 
-- [Tecnologias](#tecnologias)
-- [Funcionalidades](#funcionalidades)
-- [Instalação com Docker](#instalação-com-docker)
-- [Instalação Local](#instalação-local)
-- [Configuração do Ambiente](#configuração-do-ambiente)
-- [Comandos Úteis](#comandos-úteis)
-- [Endpoints da API](#endpoints-da-api)
-- [Testes](#testes)
-- [Troubleshooting](#troubleshooting)
-- [Documentação Adicional](#documentação-adicional)
+- [Tecnologias](#-tecnologias)
+- [Funcionalidades](#-funcionalidades)
+- [Instalação com Docker](#-instalação-com-docker-recomendado)
+- [Instalação Local](#-instalação-local)
+- [Comandos Úteis](#-comandos-úteis)
+- [Endpoints da API](#-endpoints-da-api)
+- [Testes](#-testes)
+- [Troubleshooting](#-troubleshooting)
+- [Estrutura do Projeto](#️-estrutura-do-projeto)
+- [Arquitetura e Padrões](#-arquitetura-e-padrões)
 
 ## 🚀 Tecnologias
 
@@ -39,20 +39,16 @@ API REST desenvolvida em Laravel para gerenciar um módulo simplificado de contr
 
 ### 2. Gerenciamento de Estoque
 - ✅ Registrar entrada de produtos no estoque
-- ✅ Consultar estoque atual com valores totais
-- ✅ Calcular lucro projetado
-- ✅ Resumo consolidado do inventário (total de itens, unidades, custos e valores)
-- ✅ Cálculo de margem de lucro percentual
-- ✅ Incremento automático de estoque para produtos existentes
+- ✅ Consultar estoque com valores totais e resumo consolidado
+- ✅ Cálculo de lucro projetado e margem percentual
+- ✅ Incremento automático para produtos existentes
 
 ### 3. Processamento de Vendas
 - ✅ Registrar vendas com múltiplos itens
-- ✅ Cálculo automático de valor total e margem de lucro
+- ✅ Cálculo automático de totais, lucros e margem
 - ✅ Consultar detalhes de vendas
-- ✅ Atualização automática de estoque via eventos
-- ✅ Validação de estoque disponível antes da venda
-- ✅ Cálculo de lucro por item e total
-- ✅ Evento `SaleCompleted` disparado após venda bem-sucedida
+- ✅ Validação de estoque disponível
+- ✅ Atualização automática de estoque via evento `SaleCompleted`
 
 ## 🐳 Instalação com Docker (Recomendado)
 
@@ -132,14 +128,8 @@ Após gerar, acesse a documentação interativa em: http://localhost:8000/api/do
 - **Password**: secret
 
 **Conectar ao PostgreSQL via PgAdmin:**
-1. Acesse http://localhost:5050
-2. Faça login com as credenciais acima
-3. Adicione um novo servidor:
-   - **Host**: db
-   - **Port**: 5432
-   - **Database**: api_estoque
-   - **Username**: laravel
-   - **Password**: secret
+1. Acesse http://localhost:5050 e faça login
+2. Adicione um novo servidor com as credenciais acima (Host: `db`)
 
 ## 💻 Instalação Local
 
@@ -247,37 +237,6 @@ docker compose exec app chown -R laravel:www-data /var/www
 docker compose exec app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 ```
 
-### Comandos com Makefile
-
-Se você tiver o Makefile configurado:
-```bash
-# Setup completo
-make setup
-
-# Executar testes
-make test
-
-# Limpar cache
-make cache-clear
-
-# Acessar shell do container
-make shell
-
-# Acessar PostgreSQL
-make db-shell
-
-# Ver logs
-make logs
-
-# Reiniciar containers
-make restart
-
-# Executar migrations
-make migrate
-
-# Popular banco de dados
-make seed
-```
 
 ## 📡 Endpoints da API
 
@@ -339,21 +298,6 @@ A collection inclui:
 - **POST** `/api/v1/sales` - Criar venda
 - **GET** `/api/v1/sales/{id}` - Detalhes da venda
 
-### 📚 Recursos de Documentação
-
-A API oferece múltiplas formas de documentação e teste:
-
-1. **Swagger UI** (Recomendado): http://localhost:8000/api/documentation
-   - Documentação interativa e visual
-   - Teste endpoints diretamente no navegador
-   
-2. **Postman Collection**: `postman_collection.json`
-   - Collection completa para importar no Postman
-   - Exemplos prontos para uso
-   
-3. **API_README.md**: [API_README.md](./API_README.md)
-   - Documentação detalhada em Markdown
-   - Exemplos de requisições e respostas
 
 ## 🧪 Testes
 
@@ -484,11 +428,9 @@ docker compose exec app php artisan cache:clear
 
 ## 📚 Documentação Adicional
 
-- [API_README.md](./API_README.md) - Documentação completa da API com exemplos de requisições e respostas
-- [DOCKER_README.md](./DOCKER_README.md) - Documentação detalhada do ambiente Docker
-- [Documentação do Laravel](https://laravel.com/docs)
-- [Documentação do Docker](https://docs.docker.com/)
-- [Documentação do PostgreSQL](https://www.postgresql.org/docs/)
+- **[API_README.md](./API_README.md)** - Exemplos detalhados de requisições e respostas
+- **[DOCKER_README.md](./DOCKER_README.md)** - Detalhes do ambiente Docker
+- **[Swagger UI](http://localhost:8000/api/documentation)** - Documentação interativa (após instalação)
 
 ## 🏗️ Estrutura do Projeto
 

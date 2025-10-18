@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddInventoryRequest;
 use App\Services\InventoryService;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class InventoryController extends Controller
 {
@@ -21,22 +21,29 @@ class InventoryController extends Controller
      *     path="/inventory",
      *     tags={"Estoque"},
      *     summary="Registrar entrada de produtos no estoque",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"product_id", "quantity"},
+     *
      *             @OA\Property(property="product_id", type="integer", example=1),
      *             @OA\Property(property="quantity", type="integer", example=50)
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Estoque atualizado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Estoque atualizado com sucesso"),
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=422, description="Erro de validação")
      * )
      */
@@ -72,10 +79,13 @@ class InventoryController extends Controller
      *     path="/inventory",
      *     tags={"Estoque"},
      *     summary="Obter situação atual do estoque",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Situação do estoque recuperada com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="data", type="array", @OA\Items(type="object")),
      *             @OA\Property(property="summary", type="object")
      *         )

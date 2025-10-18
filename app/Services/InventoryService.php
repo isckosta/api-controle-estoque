@@ -3,17 +3,16 @@
 namespace App\Services;
 
 use App\Models\Inventory;
-use App\Models\Product;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Exception;
 
 class InventoryService
 {
     /**
      * Adicionar estoque ao inventário.
-     * 
+     *
      * @throws Exception
      */
     public function addStock(int $productId, int $quantity): Inventory
@@ -35,7 +34,7 @@ class InventoryService
                 'quantity' => $quantity,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception('Falha ao adicionar estoque: ' . $e->getMessage());
+            throw new Exception('Falha ao adicionar estoque: '.$e->getMessage());
         }
     }
 

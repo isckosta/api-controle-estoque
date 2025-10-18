@@ -22,8 +22,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se a API permite adicionar uma quantidade de estoque
      * para um produto existente e se os dados são persistidos corretamente.
-     *
-     * @return void
      */
     public function test_can_add_inventory(): void
     {
@@ -54,8 +52,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se a API retorna erro de validação quando o product_id
      * não é fornecido na requisição.
-     *
-     * @return void
      */
     public function test_add_inventory_requires_product_id(): void
     {
@@ -72,8 +68,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se a API retorna erro de validação quando um product_id
      * inválido (não existente) é fornecido.
-     *
-     * @return void
      */
     public function test_add_inventory_requires_valid_product(): void
     {
@@ -91,8 +85,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se a API retorna erro de validação quando uma quantidade
      * zero ou negativa é fornecida.
-     *
-     * @return void
      */
     public function test_add_inventory_requires_positive_quantity(): void
     {
@@ -112,8 +104,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se a API retorna corretamente a lista de produtos em estoque
      * com suas informações detalhadas e um resumo geral do inventário.
-     *
-     * @return void
      */
     public function test_can_get_inventory_status(): void
     {
@@ -164,8 +154,6 @@ class InventoryApiTest extends TestCase
      *
      * Verifica se os totais de itens, unidades, custos, valores e lucros
      * são calculados corretamente quando há múltiplos produtos no inventário.
-     *
-     * @return void
      */
     public function test_inventory_summary_calculates_correctly(): void
     {

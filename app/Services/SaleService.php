@@ -6,8 +6,8 @@ use App\Events\SaleCompleted;
 use App\Models\Product;
 use App\Models\Sale;
 use App\Models\SaleItem;
-use Illuminate\Support\Facades\DB;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class SaleService
 {
@@ -18,14 +18,15 @@ class SaleService
     /**
      * Criar uma nova venda.
      *
-     * @param array $items [['product_id' => int, 'quantity' => int], ...]
+     * @param  array  $items  [['product_id' => int, 'quantity' => int], ...]
+     *
      * @throws Exception
      */
     public function createSale(array $items): Sale
     {
         // Validar disponibilidade de estoque
         foreach ($items as $item) {
-            if (!$this->inventoryService->hasStock($item['product_id'], $item['quantity'])) {
+            if (! $this->inventoryService->hasStock($item['product_id'], $item['quantity'])) {
                 $product = Product::find($item['product_id']);
                 throw new Exception("Estoque insuficiente para o produto: {$product->name}");
             }

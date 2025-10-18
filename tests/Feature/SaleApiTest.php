@@ -22,8 +22,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API permite criar uma venda com produtos válidos
      * e se os totais são calculados corretamente.
-     *
-     * @return void
      */
     public function test_can_create_sale(): void
     {
@@ -64,8 +62,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se ao criar uma venda, a quantidade em estoque
      * é reduzida corretamente.
-     *
-     * @return void
      */
     public function test_sale_updates_inventory(): void
     {
@@ -89,8 +85,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API impede a criação de uma venda quando
      * não há estoque suficiente.
-     *
-     * @return void
      */
     public function test_cannot_create_sale_with_insufficient_stock(): void
     {
@@ -117,8 +111,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API retorna erro de validação quando
      * nenhum item é fornecido.
-     *
-     * @return void
      */
     public function test_create_sale_requires_items(): void
     {
@@ -133,8 +125,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API valida que os produtos nos itens
      * da venda existem no banco de dados.
-     *
-     * @return void
      */
     public function test_create_sale_requires_valid_product_ids(): void
     {
@@ -153,8 +143,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API retorna corretamente as informações
      * detalhadas de uma venda específica.
-     *
-     * @return void
      */
     public function test_can_get_sale_details(): void
     {
@@ -211,8 +199,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API retorna erro 404 quando tenta buscar
      * uma venda que não existe.
-     *
-     * @return void
      */
     public function test_get_sale_returns_404_for_nonexistent_sale(): void
     {
@@ -229,8 +215,6 @@ class SaleApiTest extends TestCase
      *
      * Verifica se a API permite criar uma venda com vários produtos
      * e se os totais são calculados corretamente.
-     *
-     * @return void
      */
     public function test_can_create_sale_with_multiple_items(): void
     {

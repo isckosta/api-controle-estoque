@@ -23,7 +23,7 @@ class UpdateInventoryOnSale implements ShouldQueue
 
             if ($inventory) {
                 $inventory->removeQuantity($item->quantity);
-                
+
                 Log::info('Estoque atualizado para o produto', [
                     'product_id' => $item->product_id,
                     'quantity_sold' => $item->quantity,

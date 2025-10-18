@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateSaleRequest;
 use App\Services\SaleService;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class SaleController extends Controller
 {
@@ -21,28 +21,37 @@ class SaleController extends Controller
      *     path="/sales",
      *     tags={"Vendas"},
      *     summary="Registrar uma nova venda",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"items"},
+     *
      *             @OA\Property(
      *                 property="items",
      *                 type="array",
+     *
      *                 @OA\Items(
+     *
      *                     @OA\Property(property="product_id", type="integer", example=1),
      *                     @OA\Property(property="quantity", type="integer", example=2)
      *                 )
      *             )
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Venda criada com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Venda criada com sucesso"),
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=422, description="Erro de validação"),
      *     @OA\Response(response=400, description="Estoque insuficiente")
      * )
@@ -54,7 +63,7 @@ class SaleController extends Controller
 
             // Garantir que os relacionamentos estão carregados
             $sale->load('items.product');
-            
+
             return response()->json([
                 'message' => 'Venda criada com sucesso',
                 'data' => [
@@ -92,19 +101,25 @@ class SaleController extends Controller
      *     path="/sales/{id}",
      *     tags={"Vendas"},
      *     summary="Obter detalhes da venda",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Detalhes da venda recuperados com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=404, description="Venda não encontrada")
      * )
      */
@@ -112,7 +127,7 @@ class SaleController extends Controller
     {
         $sale = $this->saleService->getSaleDetails($id);
 
-        if (!$sale) {
+        if (! $sale) {
             return response()->json([
                 'message' => 'Venda não encontrada',
             ], 404);

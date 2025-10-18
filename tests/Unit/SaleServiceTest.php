@@ -25,13 +25,11 @@ class SaleServiceTest extends TestCase
 
     /**
      * Configura o ambiente de teste.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->saleService = new SaleService(new InventoryService());
+        $this->saleService = new SaleService(new InventoryService);
     }
 
     /**
@@ -39,8 +37,6 @@ class SaleServiceTest extends TestCase
      *
      * Verifica se o serviço cria uma venda corretamente,
      * calcula os totais e dispara o evento SaleCompleted.
-     *
-     * @return void
      */
     public function test_can_create_sale_with_single_item(): void
     {
@@ -73,8 +69,6 @@ class SaleServiceTest extends TestCase
      *
      * Verifica se o serviço cria uma venda com vários produtos
      * e calcula corretamente os totais.
-     *
-     * @return void
      */
     public function test_can_create_sale_with_multiple_items(): void
     {
@@ -108,8 +102,6 @@ class SaleServiceTest extends TestCase
      *
      * Verifica se o serviço lança exceção quando tenta criar
      * uma venda sem estoque suficiente.
-     *
-     * @return void
      */
     public function test_cannot_create_sale_with_insufficient_stock(): void
     {
@@ -132,8 +124,6 @@ class SaleServiceTest extends TestCase
      *
      * Verifica se o serviço retorna corretamente os detalhes
      * de uma venda específica com seus itens.
-     *
-     * @return void
      */
     public function test_can_get_sale_details(): void
     {
@@ -159,8 +149,6 @@ class SaleServiceTest extends TestCase
      *
      * Verifica se o serviço calcula a margem de lucro
      * percentual corretamente.
-     *
-     * @return void
      */
     public function test_sale_calculates_profit_margin_correctly(): void
     {

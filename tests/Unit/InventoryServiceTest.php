@@ -22,13 +22,11 @@ class InventoryServiceTest extends TestCase
 
     /**
      * Configura o ambiente de teste.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->inventoryService = new InventoryService();
+        $this->inventoryService = new InventoryService;
     }
 
     /**
@@ -36,8 +34,6 @@ class InventoryServiceTest extends TestCase
      *
      * Verifica se o serviço cria um novo registro de inventário
      * quando o produto ainda não possui estoque.
-     *
-     * @return void
      */
     public function test_can_add_stock_to_new_product(): void
     {
@@ -54,8 +50,6 @@ class InventoryServiceTest extends TestCase
      *
      * Verifica se o serviço incrementa corretamente a quantidade
      * quando o produto já possui estoque.
-     *
-     * @return void
      */
     public function test_can_add_stock_to_existing_inventory(): void
     {
@@ -75,8 +69,6 @@ class InventoryServiceTest extends TestCase
      *
      * Verifica se o serviço retorna corretamente se há ou não
      * estoque suficiente para uma determinada quantidade.
-     *
-     * @return void
      */
     public function test_can_check_stock_availability(): void
     {
@@ -96,8 +88,6 @@ class InventoryServiceTest extends TestCase
      *
      * Verifica se o serviço retorna corretamente as informações
      * de estoque com cálculos de custos e valores.
-     *
-     * @return void
      */
     public function test_can_get_inventory_status(): void
     {
@@ -124,8 +114,6 @@ class InventoryServiceTest extends TestCase
      *
      * Verifica se o serviço calcula corretamente os totais
      * de itens, unidades, custos, valores e lucros.
-     *
-     * @return void
      */
     public function test_can_get_inventory_summary(): void
     {

@@ -3,10 +3,10 @@
 namespace App\Services;
 
 use App\Models\Product;
+use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Exception;
 
 class ProductService
 {
@@ -20,7 +20,7 @@ class ProductService
 
     /**
      * Criar um novo produto.
-     * 
+     *
      * @throws Exception
      */
     public function createProduct(array $data): Product
@@ -34,7 +34,7 @@ class ProductService
                 'data' => $data,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception('Falha ao criar produto: ' . $e->getMessage());
+            throw new Exception('Falha ao criar produto: '.$e->getMessage());
         }
     }
 
@@ -48,7 +48,7 @@ class ProductService
 
     /**
      * Atualizar um produto existente.
-     * 
+     *
      * @throws Exception
      */
     public function updateProduct(int $id, array $data): ?Product
@@ -57,7 +57,7 @@ class ProductService
             return DB::transaction(function () use ($id, $data) {
                 $product = Product::find($id);
 
-                if (!$product) {
+                if (! $product) {
                     return null;
                 }
 
@@ -71,13 +71,13 @@ class ProductService
                 'data' => $data,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception('Falha ao atualizar produto: ' . $e->getMessage());
+            throw new Exception('Falha ao atualizar produto: '.$e->getMessage());
         }
     }
 
     /**
      * Deletar um produto.
-     * 
+     *
      * @throws Exception
      */
     public function deleteProduct(int $id): bool
@@ -86,7 +86,7 @@ class ProductService
             return DB::transaction(function () use ($id) {
                 $product = Product::find($id);
 
-                if (!$product) {
+                if (! $product) {
                     return false;
                 }
 
@@ -97,7 +97,7 @@ class ProductService
                 'product_id' => $id,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception('Falha ao deletar produto: ' . $e->getMessage());
+            throw new Exception('Falha ao deletar produto: '.$e->getMessage());
         }
     }
 }

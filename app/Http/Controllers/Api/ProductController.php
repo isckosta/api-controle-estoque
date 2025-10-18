@@ -6,14 +6,15 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateProductRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Services\ProductService;
-use Illuminate\Http\JsonResponse;
 use Exception;
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
     public function __construct(
         private ProductService $productService
     ) {}
+
     /**
      * Listar todos os produtos.
      *
@@ -21,10 +22,13 @@ class ProductController extends Controller
      *     path="/products",
      *     tags={"Produtos"},
      *     summary="Listar todos os produtos",
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Produtos recuperados com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="data", type="array", @OA\Items(type="object"))
      *         )
      *     )
@@ -60,10 +64,13 @@ class ProductController extends Controller
      *     path="/products",
      *     tags={"Produtos"},
      *     summary="Criar um novo produto",
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
      *             required={"sku", "name", "cost_price", "sale_price"},
+     *
      *             @OA\Property(property="sku", type="string", example="PROD-001"),
      *             @OA\Property(property="name", type="string", example="Nome do Produto"),
      *             @OA\Property(property="description", type="string", example="Descrição do produto"),
@@ -71,14 +78,18 @@ class ProductController extends Controller
      *             @OA\Property(property="sale_price", type="number", format="float", example=150.00)
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=201,
      *         description="Produto criado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Produto criado com sucesso"),
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=422, description="Erro de validação")
      * )
      */
@@ -116,19 +127,25 @@ class ProductController extends Controller
      *     path="/products/{id}",
      *     tags={"Produtos"},
      *     summary="Obter detalhes do produto",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Detalhes do produto recuperados com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=404, description="Produto não encontrado")
      * )
      */
@@ -136,7 +153,7 @@ class ProductController extends Controller
     {
         $product = $this->productService->getProductById($id);
 
-        if (!$product) {
+        if (! $product) {
             return response()->json([
                 'message' => 'Produto não encontrado',
             ], 404);
@@ -172,15 +189,20 @@ class ProductController extends Controller
      *     path="/products/{id}",
      *     tags={"Produtos"},
      *     summary="Atualizar um produto",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\RequestBody(
      *         required=true,
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="sku", type="string", example="PROD-001"),
      *             @OA\Property(property="name", type="string", example="Nome do Produto"),
      *             @OA\Property(property="description", type="string", example="Descrição do produto"),
@@ -188,14 +210,18 @@ class ProductController extends Controller
      *             @OA\Property(property="sale_price", type="number", format="float", example=150.00)
      *         )
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Produto atualizado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Produto atualizado com sucesso"),
      *             @OA\Property(property="data", type="object")
      *         )
      *     ),
+     *
      *     @OA\Response(response=404, description="Produto não encontrado"),
      *     @OA\Response(response=422, description="Erro de validação")
      * )
@@ -205,7 +231,7 @@ class ProductController extends Controller
         try {
             $product = $this->productService->updateProduct($id, $request->validated());
 
-            if (!$product) {
+            if (! $product) {
                 return response()->json([
                     'message' => 'Produto não encontrado',
                 ], 404);
@@ -240,19 +266,25 @@ class ProductController extends Controller
      *     path="/products/{id}",
      *     tags={"Produtos"},
      *     summary="Deletar um produto",
+     *
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
+     *
      *         @OA\Schema(type="integer")
      *     ),
+     *
      *     @OA\Response(
      *         response=200,
      *         description="Produto deletado com sucesso",
+     *
      *         @OA\JsonContent(
+     *
      *             @OA\Property(property="message", type="string", example="Produto deletado com sucesso")
      *         )
      *     ),
+     *
      *     @OA\Response(response=404, description="Produto não encontrado")
      * )
      */
@@ -261,7 +293,7 @@ class ProductController extends Controller
         try {
             $deleted = $this->productService->deleteProduct($id);
 
-            if (!$deleted) {
+            if (! $deleted) {
                 return response()->json([
                     'message' => 'Produto não encontrado',
                 ], 404);

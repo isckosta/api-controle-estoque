@@ -21,13 +21,11 @@ class ProductServiceTest extends TestCase
 
     /**
      * Configura o ambiente de teste.
-     *
-     * @return void
      */
     protected function setUp(): void
     {
         parent::setUp();
-        $this->productService = new ProductService();
+        $this->productService = new ProductService;
     }
 
     /**
@@ -35,8 +33,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço retorna corretamente a lista
      * completa de produtos.
-     *
-     * @return void
      */
     public function test_can_get_all_products(): void
     {
@@ -52,8 +48,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço cria um produto com os dados
      * fornecidos e persiste no banco de dados.
-     *
-     * @return void
      */
     public function test_can_create_product(): void
     {
@@ -78,8 +72,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço retorna o produto correto
      * quando buscado pelo ID.
-     *
-     * @return void
      */
     public function test_can_get_product_by_id(): void
     {
@@ -97,8 +89,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço retorna null ao buscar
      * um produto inexistente.
-     *
-     * @return void
      */
     public function test_returns_null_when_product_not_found(): void
     {
@@ -112,8 +102,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço atualiza corretamente os dados
      * de um produto existente.
-     *
-     * @return void
      */
     public function test_can_update_product(): void
     {
@@ -141,8 +129,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço retorna null ao tentar atualizar
      * um produto inexistente.
-     *
-     * @return void
      */
     public function test_update_returns_null_when_product_not_found(): void
     {
@@ -156,8 +142,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço remove corretamente um produto
      * do banco de dados.
-     *
-     * @return void
      */
     public function test_can_delete_product(): void
     {
@@ -174,8 +158,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço retorna false ao tentar deletar
      * um produto inexistente.
-     *
-     * @return void
      */
     public function test_delete_returns_false_when_product_not_found(): void
     {
@@ -189,8 +171,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço carrega o relacionamento
      * de inventário ao listar produtos.
-     *
-     * @return void
      */
     public function test_get_all_products_includes_inventory(): void
     {
@@ -208,8 +188,6 @@ class ProductServiceTest extends TestCase
      *
      * Verifica se o serviço carrega o relacionamento
      * de inventário ao buscar um produto específico.
-     *
-     * @return void
      */
     public function test_get_product_by_id_includes_inventory(): void
     {

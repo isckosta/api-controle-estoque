@@ -21,8 +21,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna corretamente a lista de produtos
      * com todas as informações necessárias.
-     *
-     * @return void
      */
     public function test_can_list_all_products(): void
     {
@@ -57,8 +55,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API permite criar um produto com dados válidos
      * e se os dados são persistidos corretamente no banco.
-     *
-     * @return void
      */
     public function test_can_create_product(): void
     {
@@ -94,8 +90,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna erros de validação quando campos
      * obrigatórios não são fornecidos.
-     *
-     * @return void
      */
     public function test_create_product_validates_required_fields(): void
     {
@@ -109,8 +103,6 @@ class ProductApiTest extends TestCase
      * Testa se a validação de SKU único funciona.
      *
      * Verifica se a API impede a criação de produtos com SKU duplicado.
-     *
-     * @return void
      */
     public function test_create_product_validates_unique_sku(): void
     {
@@ -132,8 +124,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API valida que o preço de venda é maior
      * que o preço de custo.
-     *
-     * @return void
      */
     public function test_create_product_validates_sale_price_greater_than_cost(): void
     {
@@ -153,8 +143,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna corretamente as informações
      * detalhadas de um produto específico.
-     *
-     * @return void
      */
     public function test_can_get_product_details(): void
     {
@@ -184,8 +172,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna erro 404 quando tenta buscar
      * um produto que não existe.
-     *
-     * @return void
      */
     public function test_get_product_returns_404_for_nonexistent_product(): void
     {
@@ -202,8 +188,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API permite atualizar dados de um produto
      * existente e se as alterações são persistidas.
-     *
-     * @return void
      */
     public function test_can_update_product(): void
     {
@@ -240,8 +224,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API impede atualizar um produto com SKU
      * que já pertence a outro produto.
-     *
-     * @return void
      */
     public function test_update_product_validates_unique_sku(): void
     {
@@ -261,8 +243,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API permite atualizar um produto sem alterar
      * seu SKU (validação de unicidade deve ignorar o próprio produto).
-     *
-     * @return void
      */
     public function test_can_update_product_with_same_sku(): void
     {
@@ -281,8 +261,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API permite excluir um produto existente
      * e se ele é removido do banco de dados.
-     *
-     * @return void
      */
     public function test_can_delete_product(): void
     {
@@ -305,8 +283,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna erro 404 quando tenta deletar
      * um produto que não existe.
-     *
-     * @return void
      */
     public function test_delete_product_returns_404_for_nonexistent_product(): void
     {
@@ -323,8 +299,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna a quantidade em estoque de cada
      * produto na listagem.
-     *
-     * @return void
      */
     public function test_product_list_includes_stock_quantity(): void
     {
@@ -334,7 +308,7 @@ class ProductApiTest extends TestCase
         $response = $this->getJson('/api/v1/products');
 
         $response->assertStatus(200);
-        
+
         $productData = collect($response->json('data'))->firstWhere('id', $product->id);
         $this->assertEquals(50, $productData['stock_quantity']);
     }
@@ -344,8 +318,6 @@ class ProductApiTest extends TestCase
      *
      * Verifica se a API retorna informações detalhadas do inventário
      * ao buscar um produto específico.
-     *
-     * @return void
      */
     public function test_product_details_include_inventory_info(): void
     {

@@ -237,6 +237,42 @@ docker compose exec app chown -R laravel:www-data /var/www
 docker compose exec app chmod -R 775 /var/www/storage /var/www/bootstrap/cache
 ```
 
+### Comandos com Makefile
+
+O projeto inclui um Makefile com comandos úteis para facilitar o desenvolvimento:
+
+```bash
+# Ver todos os comandos disponíveis
+make help
+
+# Setup completo (recomendado para primeira instalação)
+make setup
+
+# Gerenciar containers
+make up              # Iniciar containers
+make down            # Parar containers
+make restart         # Reiniciar containers
+make logs            # Ver logs
+
+# Banco de dados
+make migrate         # Executar migrations
+make seed            # Popular banco de dados
+make fresh           # Recriar banco e popular
+make db-shell        # Acessar PostgreSQL CLI
+
+# Testes e desenvolvimento
+make test            # Executar testes
+make shell           # Acessar bash do container
+make cache-clear     # Limpar todos os caches
+
+# Documentação
+make api-docs        # Gerar documentação Swagger
+
+# Dependências
+make composer-install  # Instalar dependências PHP
+make npm-install      # Instalar dependências NPM
+make npm-build        # Compilar assets
+```
 
 ## 📡 Endpoints da API
 

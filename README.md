@@ -71,7 +71,7 @@ API REST desenvolvida em Laravel para gerenciar um módulo simplificado de contr
 #### 1. Clone o repositório
 ```bash
 git clone <repository-url>
-cd php-teste-pleno
+cd api_estoque
 ```
 
 #### 2. Configure as variáveis de ambiente

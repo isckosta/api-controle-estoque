@@ -59,14 +59,18 @@ npm-build: ## Compila os assets
 	docker compose exec app npm run build
 
 setup: ## Configuração inicial completa
-	cp .env.docker .env
+	cp .env.example .env
+	rm -f composer.lock
+	docker compose down -v
 	docker compose up -d --build
 	@$(MAKE) wait-db
 	docker compose exec app php artisan key:generate
-	docker compose exec app php artisan migrate
-	docker compose exec app php artisan db:seed
+	docker compose exec app php artisan migrate:fresh --seed
 	@echo "✅ Setup concluído!"
+	@echo ""
 	@echo "🌐 API disponível em: http://localhost:8000/api/v1"
+	@echo "📊 PgAdmin disponível em: http://localhost:5050 (admin@admin.com / admin)"
+	@echo ""
 	@echo "📖 Execute 'make swagger' para instalar documentação Swagger"
 
 permissions: ## Ajusta permissões dos diretórios

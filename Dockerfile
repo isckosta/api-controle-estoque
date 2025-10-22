@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y \
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Instalar extensões PHP
-RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo pdo_pgsql pgsql mbstring exif pcntl bcmath gd sockets
 
 # Obter última versão do Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -35,7 +35,8 @@ RUN mkdir -p /home/$user/.composer && \
 WORKDIR /var/www
 
 # Copiar arquivos de dependências
-COPY composer.json composer.lock package.json package-lock.json ./
+COPY composer.json package.json package-lock.json ./
+COPY composer.lock* ./
 
 # Instalar dependências do PHP
 RUN composer install --no-dev --no-scripts --no-autoloader --prefer-dist

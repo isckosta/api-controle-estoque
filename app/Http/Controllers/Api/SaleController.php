@@ -67,20 +67,20 @@ class SaleController extends Controller
             return response()->json([
                 'message' => 'Venda criada com sucesso',
                 'data' => [
-                    'id' => $sale->id,
-                    'total_amount' => $sale->total_amount,
-                    'total_cost' => $sale->total_cost,
-                    'total_profit' => $sale->total_profit,
+                    'id'            => $sale->id,
+                    'total_amount'  => $sale->total_amount,
+                    'total_cost'    => $sale->total_cost,
+                    'total_profit'  => $sale->total_profit,
                     'profit_margin' => $sale->profit_margin,
-                    'status' => $sale->status,
-                    'items' => $sale->items->map(function ($item) {
+                    'status'        => $sale->status,
+                    'items'         => $sale->items->map(function ($item) {
                         return [
-                            'product_id' => $item->product_id,
+                            'product_id'   => $item->product_id,
                             'product_name' => $item->product->name,
-                            'quantity' => $item->quantity,
-                            'unit_price' => $item->unit_price,
-                            'subtotal' => $item->subtotal,
-                            'profit' => $item->profit,
+                            'quantity'     => $item->quantity,
+                            'unit_price'   => $item->unit_price,
+                            'subtotal'     => $item->subtotal,
+                            'profit'       => $item->profit,
                         ];
                     }),
                     'created_at' => $sale->created_at,

@@ -32,13 +32,15 @@ class SaleService
             }
         }
 
-        return DB::transaction(function () use ($items) {
+        try {
+            DB::beginTransaction();
+
             // Criar venda
             $sale = Sale::create([
                 'total_amount' => 0,
-                'total_cost' => 0,
+                'total_cost'   => 0,
                 'total_profit' => 0,
-                'status' => 'pending',
+                'status'       => 'pending',
             ]);
 
             // Criar itens da venda
@@ -46,11 +48,11 @@ class SaleService
                 $product = Product::findOrFail($item['product_id']);
 
                 SaleItem::create([
-                    'sale_id' => $sale->id,
+                    'sale_id'    => $sale->id,
                     'product_id' => $product->id,
-                    'quantity' => $item['quantity'],
+                    'quantity'   => $item['quantity'],
                     'unit_price' => $product->sale_price,
-                    'unit_cost' => $product->cost_price,
+                    'unit_cost'  => $product->cost_price,
                 ]);
             }
 
@@ -63,8 +65,13 @@ class SaleService
             $sale->markAsCompleted();
             event(new SaleCompleted($sale));
 
+            DB::commit();
+
             return $sale->fresh(['items.product']);
-        });
+        } catch (Exception $exception) {
+            DB::rollBack();
+            throw $exception;
+        }
     }
 
     /**

@@ -34,7 +34,7 @@ class InventoryApiTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJson([
-                'message' => 'Inventory updated successfully',
+                'message' => 'Estoque atualizado com sucesso',
                 'data' => [
                     'product_id' => $product->id,
                     'quantity' => 50,

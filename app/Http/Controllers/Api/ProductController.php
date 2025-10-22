@@ -38,17 +38,17 @@ class ProductController extends Controller
     {
         $products = $this->productService->getAllProducts()->map(function ($product) {
             return [
-                'id' => $product->id,
-                'sku' => $product->sku,
-                'name' => $product->name,
-                'description' => $product->description,
-                'cost_price' => $product->cost_price,
-                'sale_price' => $product->sale_price,
-                'profit_margin' => round($product->profit_margin, 2),
-                'unit_profit' => $product->unit_profit,
-                'stock_quantity' => $product->inventory?->quantity ?? 0,
-                'created_at' => $product->created_at,
-                'updated_at' => $product->updated_at,
+                'id'             => $product->id,
+                'sku'            => $product->sku,
+                'name'           => $product->name,
+                'description'    => $product->description,
+                'cost_price'     => $product->cost_price, // Preço de custo
+                'sale_price'     => $product->sale_price, // Preço de venda
+                'profit_margin'  => round($product->profit_margin, 2), // Margem de lucro
+                'unit_profit'    => $product->unit_profit, // Lucro unitário
+                'stock_quantity' => $product->inventory?->quantity ?? 0, // Quantidade em estoque
+                'created_at'     => $product->created_at,
+                'updated_at'     => $product->updated_at,
             ];
         });
 
@@ -101,15 +101,15 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'Produto criado com sucesso',
                 'data' => [
-                    'id' => $product->id,
-                    'sku' => $product->sku,
-                    'name' => $product->name,
-                    'description' => $product->description,
-                    'cost_price' => $product->cost_price,
-                    'sale_price' => $product->sale_price,
-                    'profit_margin' => round($product->profit_margin, 2),
-                    'unit_profit' => $product->unit_profit,
-                    'created_at' => $product->created_at,
+                    'id'            => $product->id,
+                    'sku'           => $product->sku,
+                    'name'          => $product->name,
+                    'description'   => $product->description,
+                    'cost_price'    => $product->cost_price, // Preço de custo
+                    'sale_price'    => $product->sale_price, // Preço de venda
+                    'profit_margin' => round($product->profit_margin, 2), // Margem de lucro
+                    'unit_profit'   => $product->unit_profit, // Lucro unitário
+                    'created_at'    => $product->created_at,
                 ],
             ], 201);
         } catch (Exception $e) {
@@ -161,20 +161,20 @@ class ProductController extends Controller
 
         return response()->json([
             'data' => [
-                'id' => $product->id,
-                'sku' => $product->sku,
-                'name' => $product->name,
-                'description' => $product->description,
-                'cost_price' => $product->cost_price,
-                'sale_price' => $product->sale_price,
-                'profit_margin' => round($product->profit_margin, 2),
-                'unit_profit' => $product->unit_profit,
-                'inventory' => $product->inventory ? [
-                    'quantity' => $product->inventory->quantity,
-                    'total_cost' => $product->inventory->total_cost,
-                    'total_value' => $product->inventory->total_value,
-                    'projected_profit' => $product->inventory->projected_profit,
-                    'last_updated' => $product->inventory->last_updated,
+                'id'            => $product->id,
+                'sku'           => $product->sku,
+                'name'          => $product->name,
+                'description'   => $product->description,
+                'cost_price'    => $product->cost_price, // Preço de custo
+                'sale_price'    => $product->sale_price, // Preço de venda
+                'profit_margin' => round($product->profit_margin, 2), // Margem de lucro ex.: 20%
+                'unit_profit'   => $product->unit_profit, // Lucro unitário
+                'inventory'     => $product->inventory ? [
+                    'quantity'         => $product->inventory->quantity,
+                    'total_cost'       => $product->inventory->total_cost, // Custo total
+                    'total_value'      => $product->inventory->total_value, // Valor total
+                    'projected_profit' => $product->inventory->projected_profit, // Lucro projetado
+                    'last_updated'     => $product->inventory->last_updated,
                 ] : null,
                 'created_at' => $product->created_at,
                 'updated_at' => $product->updated_at,

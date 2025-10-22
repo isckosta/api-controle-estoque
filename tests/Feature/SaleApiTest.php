@@ -42,7 +42,7 @@ class SaleApiTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJson([
-                'message' => 'Sale created successfully',
+                'message' => 'Venda criada com sucesso',
                 'data' => [
                     'total_amount' => 300,
                     'total_cost' => 200,
@@ -102,7 +102,7 @@ class SaleApiTest extends TestCase
 
         $response->assertStatus(400)
             ->assertJson([
-                'message' => 'Failed to create sale',
+                'message' => 'Falha ao criar venda',
             ]);
     }
 
@@ -206,7 +206,7 @@ class SaleApiTest extends TestCase
 
         $response->assertStatus(404)
             ->assertJson([
-                'message' => 'Sale not found',
+                'message' => 'Venda não encontrada',
             ]);
     }
 

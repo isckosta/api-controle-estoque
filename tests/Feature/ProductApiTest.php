@@ -70,7 +70,7 @@ class ProductApiTest extends TestCase
 
         $response->assertStatus(201)
             ->assertJson([
-                'message' => 'Product created successfully',
+                'message' => 'Produto criado com sucesso',
                 'data' => [
                     'sku' => 'TEST-001',
                     'name' => 'Test Product',
@@ -179,7 +179,7 @@ class ProductApiTest extends TestCase
 
         $response->assertStatus(404)
             ->assertJson([
-                'message' => 'Product not found',
+                'message' => 'Produto não encontrado',
             ]);
     }
 
@@ -200,12 +200,13 @@ class ProductApiTest extends TestCase
 
         $response = $this->putJson("/api/v1/products/{$product->id}", [
             'name' => 'Updated Name',
+            'cost_price' => 100,
             'sale_price' => 200,
         ]);
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Product updated successfully',
+                'message' => 'Produto atualizado com sucesso',
                 'data' => [
                     'name' => 'Updated Name',
                     'sale_price' => '200.00',
@@ -270,7 +271,7 @@ class ProductApiTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Product deleted successfully',
+                'message' => 'Produto deletado com sucesso',
             ]);
 
         $this->assertDatabaseMissing('products', [
@@ -290,7 +291,7 @@ class ProductApiTest extends TestCase
 
         $response->assertStatus(404)
             ->assertJson([
-                'message' => 'Product not found',
+                'message' => 'Produto não encontrado',
             ]);
     }
 
